@@ -1,7 +1,15 @@
 import React from 'react';
 
-const Repository: React.FC = () => {
-  return <h1>Repository</h1>;
+import { useRouteMatch } from 'react-router-dom';
+
+interface RepositoryParams {
+  repository: string;
+}
+
+const Dashboard: React.FC = () => {
+  const { params } = useRouteMatch<RepositoryParams>();
+
+  return <div>Repository:{params.repository}</div>;
 };
 
-export default Repository;
+export default Dashboard;
