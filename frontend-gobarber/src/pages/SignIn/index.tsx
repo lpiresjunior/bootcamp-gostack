@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -31,14 +31,14 @@ const SignIn: React.FC = () => {
       try {
         formRef.current?.setErrors({});
 
-        const scheema = Yup.object().shape({
+        const schema = Yup.object().shape({
           email: Yup.string()
-            .required('E-mail obrigatório')
-            .email('Digite um e-mail válido'),
+            .email('Digite um e-mail válido')
+            .required('E-mail obrigatório'),
           password: Yup.string().required('Senha obrigatória'),
         });
 
-        await scheema.validate(data, {
+        await schema.validate(data, {
           abortEarly: false,
         });
 
@@ -56,7 +56,7 @@ const SignIn: React.FC = () => {
         addToast({
           type: 'error',
           title: 'Erro na autenticação',
-          description: 'Ocorreu um erro ao fazer login, cheque as credencias.',
+          description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
         });
       }
     },
@@ -72,6 +72,7 @@ const SignIn: React.FC = () => {
           <h1>Faça seu Logon</h1>
 
           <Input name="email" icon={FiMail} placeholder="E-mail" />
+
           <Input
             name="password"
             icon={FiLock}
@@ -84,7 +85,7 @@ const SignIn: React.FC = () => {
           <a href="forgot">Esqueci minha senha</a>
         </Form>
 
-        <a href="login">
+        <a href="signup">
           <FiLogIn />
           Criar conta
         </a>
